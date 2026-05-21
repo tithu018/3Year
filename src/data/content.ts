@@ -9,7 +9,7 @@ export const GIRLFRIEND_NAME = "My Love";
 
 // --- SPECIAL DATE (for passcode lock) ---
 // Change this to your special date in DD/MM/YYYY format
-export const SPECIAL_DATE = "13/06/2000";
+export const SPECIAL_DATE = "13/06/2023";
 export const SPECIAL_DATE_HINT = "The day our story began...";
 
 // --- QUIZ QUESTIONS ---
