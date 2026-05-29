@@ -97,15 +97,15 @@ export const LOVE_LETTER = `My love, you unlocked my heart because you already o
 // You can use local images in /public folder or external URLs
 export const GALLERY_PHOTOS = [
   {
-    url: "https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=400",
-    caption: "Our beginning",
+    url: `${import.meta.env.BASE_URL}ring.jpeg`,
+    caption: "The day of the ring",
   },
   {
-    url: "https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg?auto=compress&cs=tinysrgb&w=400",
+    url: `${import.meta.env.BASE_URL}adventure.jpeg`,
     caption: "Adventures together",
   },
   {
-    url: "https://images.pexels.com/photos/1444666/pexels-photo-1444666.jpeg?auto=compress&cs=tinysrgb&w=400",
+    url: `${import.meta.env.BASE_URL}sunset.jpeg`,
     caption: "Sunset moments",
   },
   {
@@ -113,12 +113,13 @@ export const GALLERY_PHOTOS = [
     caption: "Coffee dates",
   },
   {
-    url: "https://images.pexels.com/photos/1619241/pexels-photo-1619241.jpeg?auto=compress&cs=tinysrgb&w=400",
-    caption: "Stargazing nights",
+    url: `${import.meta.env.BASE_URL}cin.jpeg`,
+    caption: "Popcorn & love",
   },
   {
-    url: "https://images.pexels.com/photos/1095814/pexels-photo-1095814.jpeg?auto=compress&cs=tinysrgb&w=400",
-    caption: "Our happy place",
+    url: `${import.meta.env.BASE_URL}mir.jpeg`,
+    caption: "Reflections of love",
+    thumbnailPosition: "center top",
   },
 ];
 
