@@ -215,9 +215,16 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    if (!MUSIC_PATH) return;
+
     audioRef.current = new Audio(MUSIC_PATH);
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3;
+
+    return () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    };
   }, []);
 
   const toggleMusic = useCallback(() => {
@@ -240,15 +247,17 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
 
       {/* Control buttons */}
       <div className="fixed top-4 left-4 z-40 flex flex-col gap-2">
-        <motion.button
-          onClick={toggleMusic}
-          className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-rose-500/20 flex items-center justify-center hover:bg-rose-500/10 transition-colors"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title={musicPlaying ? "Pause music" : "Play music"}
-        >
-          <Music className={`w-4 h-4 ${musicPlaying ? "text-rose-400" : "text-rose-400/50"}`} />
-        </motion.button>
+        {MUSIC_PATH && (
+          <motion.button
+            onClick={toggleMusic}
+            className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-rose-500/20 flex items-center justify-center hover:bg-rose-500/10 transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            title={musicPlaying ? "Pause music" : "Play music"}
+          >
+            <Music className={`w-4 h-4 ${musicPlaying ? "text-rose-400" : "text-rose-400/50"}`} />
+          </motion.button>
+        )}
 
         <motion.button
           onClick={() => setDarkMode(!darkMode)}
