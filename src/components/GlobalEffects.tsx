@@ -217,13 +217,41 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
   useEffect(() => {
     if (!MUSIC_PATH) return;
 
-    audioRef.current = new Audio(MUSIC_PATH);
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.5;
-    audioRef.current.preload = "auto";
+    const audio = new Audio(MUSIC_PATH);
+    audioRef.current = audio;
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.preload = "auto";
+
+    const handlePlay = () => setMusicPlaying(true);
+    const handlePause = () => setMusicPlaying(false);
+    const removeUnlockListeners = () => {
+      window.removeEventListener("pointerdown", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
+    };
+    const tryStartMusic = () => {
+      audio.play().then(removeUnlockListeners).catch(() => {
+        // Audible autoplay is browser-controlled; the first interaction retries it.
+      });
+    };
+    const handleFirstInteraction = (event: Event) => {
+      const target = event.target;
+      if (target instanceof Element && target.closest("[data-music-control]")) return;
+      tryStartMusic();
+    };
+
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    window.addEventListener("pointerdown", handleFirstInteraction);
+    window.addEventListener("keydown", handleFirstInteraction);
+
+    tryStartMusic();
 
     return () => {
-      audioRef.current?.pause();
+      removeUnlockListeners();
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.pause();
       audioRef.current = null;
     };
   }, []);
@@ -260,6 +288,7 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
         {MUSIC_PATH && (
           <motion.button
             onClick={toggleMusic}
+            data-music-control
             className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm border border-rose-500/20 flex items-center justify-center hover:bg-rose-500/10 transition-colors"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
