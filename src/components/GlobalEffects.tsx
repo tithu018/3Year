@@ -219,7 +219,8 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
 
     audioRef.current = new Audio(MUSIC_PATH);
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
+    audioRef.current.volume = 0.5;
+    audioRef.current.preload = "auto";
 
     return () => {
       audioRef.current?.pause();
@@ -227,15 +228,24 @@ export default function GlobalEffects({ children }: GlobalEffectsProps) {
     };
   }, []);
 
-  const toggleMusic = useCallback(() => {
-    if (!audioRef.current) return;
-    if (musicPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
+  const toggleMusic = useCallback(async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!audio.paused) {
+      audio.pause();
+      setMusicPlaying(false);
+      return;
     }
-    setMusicPlaying(!musicPlaying);
-  }, [musicPlaying]);
+
+    try {
+      await audio.play();
+      setMusicPlaying(true);
+    } catch (error) {
+      console.error("Unable to play background music.", error);
+      setMusicPlaying(false);
+    }
+  }, []);
 
   return (
     <div className={darkMode ? "dark" : ""}>

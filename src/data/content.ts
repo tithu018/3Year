@@ -153,7 +153,7 @@ export const NEXT_ANNIVERSARY = "2026-06-13T00:00:00";
 // --- BACKGROUND MUSIC ---
 // Place your music file in /public, then set this to:
 // `${import.meta.env.BASE_URL}romantic-music.mp3`
-export const MUSIC_PATH = "";
+export const MUSIC_PATH = `${import.meta.env.BASE_URL}romantic-music.mp3`;
 
 // --- THEME COLORS ---
 export const THEME = {
