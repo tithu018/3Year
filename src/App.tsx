@@ -11,6 +11,7 @@ import LoveWheel from "./components/LoveWheel";
 import ScratchCard from "./components/ScratchCard";
 import OpenWhenLetters from "./components/OpenWhenLetters";
 import LoveLetter from "./components/LoveLetter";
+import HeartbeatSync from "./components/HeartbeatSync";
 import MemoryGallery from "./components/MemoryGallery";
 import PromiseSection from "./components/PromiseSection";
 import FinalFireworks from "./components/FinalFireworks";
@@ -26,6 +27,7 @@ const STAGES = [
   "scratchCard",
   "openWhen",
   "loveLetter",
+  "heartbeatSync",
   "gallery",
   "promises",
   "final",
@@ -107,6 +109,12 @@ function App() {
         {stage === "loveLetter" && (
           <motion.div key="loveLetter" variants={pageVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.5 }}>
             <LoveLetter onComplete={next} />
+          </motion.div>
+        )}
+
+        {stage === "heartbeatSync" && (
+          <motion.div key="heartbeatSync" variants={pageVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.5 }}>
+            <HeartbeatSync onComplete={next} />
           </motion.div>
         )}
 

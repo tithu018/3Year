@@ -92,6 +92,10 @@ export const OPEN_WHEN_LETTERS = [
 // --- LOVE LETTER ---
 export const LOVE_LETTER = `My love, you unlocked my heart because you already own it. These three years with you have been the most beautiful part of my life. Every smile, every message, every little moment with you means more than words can explain. Thank you for being my happiness, my peace, and my forever person. Happy 3rd anniversary, my love. I love you endlessly.`;
 
+// --- HEARTBEAT SYNC ---
+// Revealed after holding the heart until the sync reaches 100%
+export const HEART_SYNC_MESSAGE = "No matter how far apart we are, my heart will always find the rhythm of yours.";
+
 // --- MEMORY GALLERY ---
 // Replace these with your own photo URLs
 // You can use local images in /public folder or external URLs

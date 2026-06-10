@@ -147,7 +147,7 @@ export default function LoveLetter({ onComplete }: LoveLetterProps) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  See Our Memories
+                  Sync Our Hearts
                 </motion.button>
               </motion.div>
             )}
